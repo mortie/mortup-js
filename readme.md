@@ -131,3 +131,8 @@ Here's a small rundown of all the features in the language.
 	However, you may need unsanitized HTML sometimes:<br>
 	<script>alert("I can do whatever I want now.")</script>
 	<div>It doesn't even *care* about formatting either.</div>
+
+
+## Legal
+
+All files in this directory belong to me, Martin Dørum Nygaard, and are licensed under the GNU General Public License v2.
