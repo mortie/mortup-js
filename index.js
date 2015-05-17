@@ -51,6 +51,42 @@ var patterns =
 		last: true
 	},
 	{
+		name: "sortedlist",
+		regex: /^\s*([0-9]+)\.\s+(.*)/,
+		state: "sortedlist",
+		last: true
+	}, {
+		name: "sortedlist_start",
+		regex: /^\s*([0-9]+)\.\s+(.*)/,
+		startstate: "sortedlist",
+		last: true
+	}, {
+		name: "sortedlist_end",
+		regex: /(.*)/,
+		state: "sortedlist",
+		endstate: "sortedlist",
+		last: true,
+		lastrun: true
+	},
+	{
+		name: "bulletlist",
+		regex: /^\s*\*\s*(.*)/,
+		state: "bulletlist",
+		last: true
+	}, {
+		name: "bulletlist_start",
+		regex: /^\s*\*\s*(.*)/,
+		startstate: "bulletlist",
+		last: true
+	}, {
+		name: "bulletlist_end",
+		regex: /(.*)/,
+		state: "bulletlist",
+		endstate: "bulletlist",
+		last: true,
+		lastrun: true
+	},
+	{
 		name: "newline",
 		regex: /(.*)/,
 		last: true
@@ -60,25 +96,30 @@ var patterns =
 		regex: /(.*)/,
 		state: "blockquote",
 		last: true
-	},
+	}
 ]
 
 var states = {
 	codeblock: 0,
-	blockquote: 0
+	blockquote: 0,
+	sortedlist: 0,
+	bulletlist: 0
 }
 
 module.exports = function(str)
 {
 	var res = "";
 	var prevpattern = "NONE";
+	str = str.trim();
+	str += "\n";
 
-	str.split("\n").map(function(line)
+	str.split("\n").map(function(line, linenum, arr)
 	{
 		var p, i, m, j, t, shouldbreak;
 		var compiled = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		var prevcompiled = line;
 		var firstrun = false;
+		var lastrun = (linenum + 1 === arr.length);
 
 		while (true)
 		{
@@ -87,7 +128,7 @@ module.exports = function(str)
 			{
 				p = patterns[i];
 				t = p.regex.test(compiled);
-				if (t)
+				if (t && (!lastrun || p.lastrun))
 				{
 					m = compiled.match(p.regex);
 
@@ -125,7 +166,9 @@ module.exports = function(str)
 			firstrun = true;
 		}
 
-		res += compiled + "\n";
+		res += compiled;
+		if (!lastrun)
+			res += "\n";
 	});
 
 	return res.substring(0, res.length - 1);
@@ -163,6 +206,20 @@ function compile(p, match)
 		return match[1];
 	case "blockquote_end":
 		return "</blockquote>";
+
+	case "sortedlist_start":
+		return "<ol start=\""+match[1]+"\">\n<li>"+match[2]+"</li>";
+	case "sortedlist":
+		return "<li value=\""+match[1]+"\">"+match[2]+"</li>";
+	case "sortedlist_end":
+		return "</ol>\n"+match[1];
+
+	case "bulletlist_start":
+		return "<ul>\n<li>"+match[1]+"</li>";
+	case "bulletlist":
+		return "<li>"+match[1]+"</li>";
+	case "bulletlist_end":
+		return "</ul>\n"+match[1];
 
 	case "newline":
 		return match[1]+"<br>";

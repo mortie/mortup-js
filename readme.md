@@ -23,6 +23,26 @@ Here's a small rundown of the mortup language:
 	And this contains an image: <img src="http://example.com/pic.png>
 
 
+	* Here we have a bullet list.
+	* It can have *many* elements.
+
+	<ul>
+	<li>Here we have a bullet list.</li>
+	<li>It can have <strong>many</strong> elements.
+	</ul>
+
+
+	1. This is a sorted, or ordered, list.
+	2. It has ordered elements.
+	9. Elements don't have to be sequential, however.
+
+	<ol start="1">
+	<li>This is a sorted, or ordered, list.</li>
+	<li value="2">It has ordered elements.</li>
+	<li value="9">Elements don't have to be sequential, however.</li>
+	</ol>
+
+
 	```
 		This is a code block.
 		Things won't *be bold* or _italized_ here.
