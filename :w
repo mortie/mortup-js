@@ -36,7 +36,7 @@ var patterns =
 	},
 	{
 		name: "emphasis",
-		regex: /(.*)\/\/(.+)\/\/(.*)/
+		regex: /(.*)[^<]\/(.+)\/(.*)/
 	}, {
 		name: "strong",
 		regex: /(.*)\*(.+)\*(.*)/

@@ -3,7 +3,7 @@
 ### Another header, this time h3.
 ####		I have so many headers.
 ##### Another header, this time h5.
-###### Header, both *bold* and _emphasized_, with `code`.
+###### Header, both *bold* and //emphasized//, with `code`.
 
 # #### This is a h1, despite the extra hashes.
 

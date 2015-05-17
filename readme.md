@@ -23,20 +23,20 @@ console.log(mortup("Some *mortup* text", {
 Here are the features with Markdown which annoy me, and the reasons I decided to create my own format.
 
 * **Blockquotes**. With Markdown, I can't really figure out a nice way to quote paragraphs. You either have to insert hard newlines and prefix each line with '>', which makes the plaintext markdown look pretty but is usually a lot of unnecessary work, or leave the markdown looking ugly. I fix this by making blockquotes work like code blocks, except with ">>>" instead of "```".
-* **Bold and italics**. In markdown, both `__something__` and `**something**` creates bold text (`<strong>`), while both `_something_` and `*something*` creates italized text (`<em>`). I find this to be redundant and silly, and decided to make `*something*` bold and `_something`_ italics.
+* **Bold and italics**. In markdown, both `__something__` and `**something**` creates strong text (bold), while both `_something_` and `*something*` creates emphasized text (italics). I find this to be redundant and silly, and decided to make `*something*` strong, `//something//` emphasized, and `_something`_ underlined.
 * **Links**. Links in markdown looks like this: `[Some link text](http://example.com)`. I find that to be backwards. In text, citations are often in brackets, and even Markdown's footnotes use brackets. Therefore, I made the link syntax `(Some link text)[http://example.com]`. The new image syntax is `img[http://example.com/image.png]`.
 * **Ordered lists**. With Markdown, regardless of how your plaintext markdown text looks like, sorted lists will always start at 1, and each new element will always increment by 1. This is an unnecessary constraint, as HTML has a native way of dealing with non-sequential ordered lists, and even "ordered" lists where the numbers aren't ordered.
 * **Two spaces at the end of the line** creates a hard newline in Markdown. I find that to be ridiculous. That means two lines can look exactly identical, yet produce different HTML. It's also easy to accidentally include those two spaces where they're not intended. I fixed this by just inserting a `<br>` anywhere the page breaks. I know there are some people who disagree with this, but I feel that it's a decent solution, and more intuitive than what Markdown does.
-* **Code blocks**. In Markdown, there are many ways to denote that something is a code block; one is to indent consecutive lines, which is hard in a `<textarea>`, which is one of the main places in which Markdown is used. The other is to use code in \`\`\`, which I think is a better solution, but Markdown's implementation has been fiddly in my exprience. For example, you can't have a code block with a non-empty line directly above it. I have simplified all of this by just always having blocks of \`\`\` generate `<pre><code>...</code></pre>`.
+* **Code blocks**. In Markdown, there are many ways to denote that something is a code block; one is to indent consecutive lines, which is hard in a `<textarea>`, which is one of the main places in which Markdown is used. The other is to use code in `\`\`\``, which I think is a better solution, but Markdown's implementation has been fiddly in my exprience. For example, you can't have a code block with a non-empty line directly above it. I have simplified all of this by just always having blocks of `\`\`\`` generate `<pre><code>...</code></pre>`.
 * **Unsanitized HTML**. A lot of markdown parsers allow you to write HTML in your markdown text. However, this has always been problematic for me, as that HTML goes through the markdown parser, which may break things. In Mortup, HTML will always be escaped, _unless_ it's in a block, similar to code blocks, of `!!!!`. If the `allow_unsanitized: true` option is passed to the parser, everything inside of blocks surrounded by `!!!!` will be taken as-is, not going through the markdown parser, and not sanitized.
 
 ### Syntax
 
 Here's a small rundown of all the features in the language.
 
-	This line has *bold* words, and it has _italized_ words.
+	This line has *bold* words, and it has //italized// words. It even has _underlined_ words.
 
-	This line has <strong>bold</strong> words, and it has <em>italized</em> words.<br>
+	This line has <strong>bold</strong> words, and it has <em>italized</em> words. It even has <u>underlined</u> words.<br>
 
 
 	This line contains `code`.

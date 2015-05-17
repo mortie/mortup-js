@@ -9,7 +9,7 @@ It goes over multiple lines.
 
 >>>
 Now we are testing *formatting in block quotes*.
-_This is interesting for sure._
+//This is interesting for sure.//
 ```
 	We can have code in here.
 ```
