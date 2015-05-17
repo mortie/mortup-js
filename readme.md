@@ -56,7 +56,7 @@ Here's a small rundown of all the features in the language.
 
 	<ul>
 	<li>Here we have a bullet list.</li>
-	<li>It can have <strong>many</strong> elements.
+	<li>It can have <strong>many</strong> elements.</li>
 	</ul>
 
 
@@ -127,7 +127,7 @@ Here's a small rundown of all the features in the language.
 	<div>It doesn't *care* about formatting either.</div>
 	!!!!
 
-	Most of the time you want safe &lt;div&gt;sanitized HTML&lt;div&gt;.
-	However, you may need unsanitized HTML sometimes:
+	Most of the time you want safe &lt;div&gt;sanitized HTML&lt;div&gt;.<br>
+	However, you may need unsanitized HTML sometimes:<br>
 	<script>alert("I can do whatever I want now.")</script>
 	<div>It doesn't even *care* about formatting either.</div>
