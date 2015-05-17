@@ -16,6 +16,13 @@ Here's a small rundown of the mortup language:
 	This line contains <code>code</code>.<br>
 
 
+	This line contains (a link)[https://github.com/mortie/mortup].
+	And this contains an image: img[http://example.com/pic.png]
+
+	This line contains <a href="https://github.com/mortie/mortup">a link</a>.
+	And this contains an image: <img src="http://example.com/pic.png>
+
+
 	```
 		This is a code block.
 		Things won't *be bold* or _italized_ here.
