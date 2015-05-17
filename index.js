@@ -49,7 +49,7 @@ module.exports = function(str)
 	str.split("\n").map(function(line)
 	{
 		var p, i, m, j, t, shouldbreak;
-		var compiled = line;
+		var compiled = line.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		var prevcompiled = line;
 		var firstrun = false;
 

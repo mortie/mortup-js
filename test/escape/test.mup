@@ -1,0 +1,3 @@
+This tests <strong>HTML</strong> escaping.
+We don't <div>want people to</span> have unsanitized HTML in their documents.
+<script>alert("yo")</script>
