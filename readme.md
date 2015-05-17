@@ -44,6 +44,23 @@ Here's a small rundown of the mortup language:
 	It has <strong>multiple</strong> newlines.
 
 
-	This is a very long continuous line of text. It relies on soft wrapping. No <br> tags will automatically be inserted, it is up to the HTML renderer to break the text wherever it sees fit. We also <strong>make sure to</strong> <em>escape</em> any HTML.
+	This is a very long continuous line of text. It relies on soft wrapping. No <br> tags will automatically be inserted, it is up to the HTML renderer to break the text wherever it sees fit.
 
-	This is a very long continuous line of text. It relies on soft wrapping. No &lt;br&gt; tags will automatically be inserted, it is up to the HTML renderer to break the text wherever it sees fit. We also <strong>make sure to</strong> <em>escape</em> any HTML.
+	This is a very long continuous line of text. It relies on soft wrapping. No &lt;br&gt; tags will automatically be inserted, it is up to the HTML renderer to break the text wherever it sees fit.
+
+
+	>>>
+	This is a blockquote.
+	We can have *all kinds* of formatting here.
+	```
+		Even code!
+	```
+	>>>
+
+	<blockquote>
+	This is a blockquote.<br>
+	We can have <strong>all kinds</strong> of formatting here.
+	<pre><code>
+		Even code!
+	</pre></code>
+	</blockquote>

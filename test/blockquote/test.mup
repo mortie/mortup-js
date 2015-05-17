@@ -1,0 +1,17 @@
+>>>
+This is a quote.
+>>>
+
+>>>
+This is a rather long quote.
+It goes over multiple lines.
+>>>
+
+>>>
+Now we are testing *formatting in block quotes*.
+_This is interesting for sure._
+```
+	We can have code in here.
+```
+We can also have `inline code`.
+>>>

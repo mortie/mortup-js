@@ -3,29 +3,27 @@ var patterns =
 	{
 		name: "codeblock_end",
 		regex: /^```$/,
-		before: ["codeblock"],
+		state: "codeblock",
+		endstate: "codeblock",
 		last: true
-	},
-	{
+	}, {
 		name: "codeblock_start",
 		regex: /^```$/,
+		startstate: "codeblock",
 		last: true
-	},
-	{
+	}, {
 		name: "codeblock",
 		regex: /(.*)/,
-		before: ["codeblock", "codeblock_start"],
+		state: "codeblock",
 		last: true
 	},
 	{
 		name: "strong",
 		regex: /(.*)\*(.+)\*(.*)/
-	},
-	{
+	}, {
 		name: "emphasis",
 		regex: /(.*)_(.+)_(.*)/
-	},
-	{
+	}, {
 		name: "code",
 		regex: /(.*)`(.+)`(.*)/
 	},
@@ -35,11 +33,34 @@ var patterns =
 		last: true
 	},
 	{
+		name: "blockquote_end",
+		regex: /^&gt;&gt;&gt;$/,
+		state: "blockquote",
+		endstate: "blockquote",
+		last: true
+	}, {
+		name: "blockquote_start",
+		regex: /^&gt;&gt;&gt;$/,
+		startstate: "blockquote",
+		last: true
+	},
+	{
 		name: "newline",
 		regex: /(.*)/,
 		last: true
-	}
+	},
+	{
+		name: "blockquote",
+		regex: /(.*)/,
+		state: "blockquote",
+		last: true
+	},
 ]
+
+var states = {
+	codeblock: 0,
+	blockquote: 0
+}
 
 module.exports = function(str)
 {
@@ -64,20 +85,11 @@ module.exports = function(str)
 				{
 					m = compiled.match(p.regex);
 
-					if (p.before === undefined)
+					if (p.state === undefined)
 						break;
 
 					shouldbreak = false;
-					for (j = 0; j < p.before.length; ++j)
-					{
-						if (prevpattern === p.before[j])
-						{
-							shouldbreak = true;
-							break;
-						}
-					}
-
-					if (shouldbreak)
+					if (states[p.state] > 0)
 						break;
 				}
 				else
@@ -85,6 +97,11 @@ module.exports = function(str)
 					m = false;
 				}
 			}
+
+			if (p.startstate)
+				states[p.startstate] += 1;
+			if (p.endstate && states[p.endstate] > 0)
+				states[p.endstate] -= 1;
 
 			//Stop if there is no match
 			if (!m)
@@ -116,19 +133,30 @@ function compile(p, match)
 		return match[1]+"<strong>"+match[2]+"</strong>"+match[3];
 	case "emphasis":
 		return match[1]+"<em>"+match[2]+"</em>"+match[3];
+	case "code":
+		return match[1]+"<code>"+match[2]+"</code>"+match[3];
+
 	case "head":
 		var n = match[1].length;
 		return "<h"+n+">"+match[2]+"</h"+n+">";
+
 	case "codeblock_start":
 		return "<pre><code>";
 	case "codeblock":
 		return match[1];
 	case "codeblock_end":
 		return "</code></pre>";
-	case "code":
-		return match[1]+"<code>"+match[2]+"</code>"+match[3];
+
+	case "blockquote_start":
+		return "<blockquote>";
+	case "blockquote":
+		return match[1];
+	case "blockquote_end":
+		return "</blockquote>";
+
 	case "newline":
 		return match[1]+"<br>";
+
 	default:
 		throw new Error("Pattern "+p+" doesn't exist.");
 	}
