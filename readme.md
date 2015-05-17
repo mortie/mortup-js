@@ -91,3 +91,15 @@ Here's a small rundown of the mortup language:
 		Even code!
 	</pre></code>
 	</blockquote>
+
+	Most of the time, you want safe <div>sanitized HTML</div>.
+	However, you may need unsanitized HTML sometimes:
+	!!!!
+	<script>alert("I can do whatever I want now.")</script>
+	<div>It doesn't *care* about formatting either.</div>
+	!!!!
+
+	Most of the time you want safe &lt;div&gt;sanitized HTML&lt;div&gt;.
+	However, you may need unsanitized HTML sometimes:
+	<script>alert("I can do whatever I want now.")</script>
+	<div>It doesn't even *care* about formatting either.</div>

@@ -14,7 +14,7 @@ dirs.forEach(function(dir)
 	{
 		if (err) throw err;
 
-		var html = mortup(res.trim());
+		var html = mortup(res.trim(), {allow_unsanitized: true});
 		fs.writeFile("test/"+dir+"/test.html", html, function(err)
 		{
 			if (err) throw err;

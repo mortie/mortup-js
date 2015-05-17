@@ -1,0 +1,8 @@
+This is <div>sanitized HTML.</span>
+
+!!!!
+This is <div>unsanitized HTML.</span>
+<script>alert("I can do whatever I want in here.")</script>
+It doesn't *care* about _formatting_.
+!!!!
+Back to <script>sanitized HTML</script>.

@@ -35,7 +35,7 @@ dirs.forEach(function(dir)
 
 function test(name, mup, html)
 {
-	testhtml = mortup(mup);
+	testhtml = mortup(mup, {allow_unsanitized: true});
 	if (testhtml !== html)
 	{
 		console.log("########## Test "+name+" failed! ##########");

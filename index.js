@@ -1,6 +1,23 @@
 var patterns =
 [
 	{
+		name: "raw_end",
+		regex: /^\!\!\!\!$/,
+		state: "raw",
+		endstate: "raw",
+		last: true
+	}, {
+		name: "raw_start",
+		regex: /^\!\!\!\!$/,
+		startstate: "raw",
+		last: true
+	}, {
+		name: "raw",
+		regex: /(.*)/,
+		state: "raw",
+		last: true
+	},
+	{
 		name: "codeblock_end",
 		regex: /^```$/,
 		state: "codeblock",
@@ -100,13 +117,14 @@ var patterns =
 ]
 
 var states = {
+	raw: 0,
 	codeblock: 0,
 	blockquote: 0,
 	sortedlist: 0,
 	bulletlist: 0
 }
 
-module.exports = function(str)
+module.exports = function(str, opts)
 {
 	var res = "";
 	var prevpattern = "NONE";
@@ -157,7 +175,7 @@ module.exports = function(str)
 			prevpattern = p.name;
 
 			//Compile
-			compiled = compile(p.name, m);
+			compiled = compile(p.name, m, opts);
 
 			if (compiled === prevcompiled || p.last)
 				break;
@@ -174,7 +192,7 @@ module.exports = function(str)
 	return res.substring(0, res.length - 1);
 }
 
-function compile(p, match)
+function compile(p, match, opts)
 {
 	switch (p)
 	{
@@ -192,6 +210,19 @@ function compile(p, match)
 	case "head":
 		var n = match[1].length;
 		return "<h"+n+">"+match[2]+"</h"+n+">";
+
+	case "raw_start":
+		if (opts.allow_unsanitized === true)
+			return "";
+		else
+			throw new Error("Unsanitized code is disabled.");
+	case "raw":
+		if (opts.allow_unsanitized === true)
+			return match[1].replace(/&gt;/g, ">").replace(/&lt;/g, "<");
+		else
+			return match[1];
+	case "raw_end":
+		return "";
 
 	case "codeblock_start":
 		return "<pre><code>";
