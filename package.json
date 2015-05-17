@@ -16,6 +16,10 @@
   "keywords": [
     "markup"
   ],
-  "author": "Martin Dørum Nygaard",
+  "author": {
+    "name": "Martin Dørum Nygaard",
+    "email": "martid0311@gmail.com",
+    "url": "http://mort.coffee"
+  },
   "license": "GPLv2"
 }
