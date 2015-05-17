@@ -1,2 +1,2 @@
-This line img[http://example.com/test.png] contains an image.
-img[http://example.com/test.png]
+This line !(Some Image)[http://example.com/test.png] contains an image.
+!(Another Image)[http://example.com/test.png]

@@ -47,11 +47,11 @@ var patterns =
 		name: "code",
 		regex: /(.*)`(.+)`(.*)/
 	}, {
+		name: "image",
+		regex: /(.*)\!\((.*)\)\[(.*)\](.*)/
+	}, {
 		name: "link",
 		regex: /(.*)\((.*)\)\[(.*)\](.*)/
-	}, {
-		name: "image",
-		regex: /(.*)img\[(.*)\](.*)/
 	},
 	{
 		name: "head",
@@ -207,10 +207,10 @@ function compile(p, match, opts)
 		return match[1]+"<u>"+match[2]+"</u>"+match[3];
 	case "code":
 		return match[1]+"<code>"+match[2]+"</code>"+match[3];
+	case "image":
+		return match[1]+"<img src=\""+match[3]+"\" alt=\""+match[2]+"\">"+match[4];
 	case "link":
 		return match[1]+"<a href=\""+match[3]+"\">"+match[2]+"</a>"+match[4];
-	case "image":
-		return match[1]+"<img src=\""+match[2]+"\">"+match[3];
 
 	case "head":
 		var n = match[1].length;
