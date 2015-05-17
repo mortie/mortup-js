@@ -1,0 +1,21 @@
+{
+  "name": "mortup",
+  "version": "1.0.0",
+  "description": "A simple markup language.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mortie/mortup.git"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "markup"
+  ],
+  "author": "Martin Dørum Nygaard",
+  "license": "GPLv2"
+}

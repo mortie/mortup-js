@@ -1,0 +1,9 @@
+#This is a h1.
+##         This is also a header.
+### Another header, this time h3.
+####		I have so many headers.
+##### Another header, this time h5.
+###### Header, both *bold* and _emphasized_, with `code`.
+
+# #### This is a h1, despite the extra hashes.
+
