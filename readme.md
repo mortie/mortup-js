@@ -135,4 +135,4 @@ Here's a small rundown of all the features in the language.
 
 ## Legal
 
-All files in this directory belong to me, Martin Dørum Nygaard, and are licensed under the GNU General Public License v2.
+All files in this directory are licensed under the GNU General Public License v2.
