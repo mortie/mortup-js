@@ -90,6 +90,17 @@ Here's a small rundown of all the features in the language.
 	</code></pre>
 
 
+	``` javascript
+		This code block is javascript.
+		console.log("hi");
+	```
+
+	<pre><code data-language="javascript">
+		This code block is javascript.
+		console.log("hi");
+	</code></pre>
+
+
 	This is just some general text.
 	It has some newlines.
 	It has *multiple* newlines.

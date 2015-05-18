@@ -25,7 +25,7 @@ var patterns =
 		last: true
 	}, {
 		name: "codeblock_start",
-		regex: /^```$/,
+		regex: /^```(?:\s+([^\s]+))?$/,
 		startstate: "codeblock",
 		last: true
 	}, {
@@ -230,7 +230,10 @@ function compile(p, match, opts)
 		return "";
 
 	case "codeblock_start":
-		return "<pre><code>";
+		if (match[1])
+			return "<pre><code data-language=\""+match[1]+"\">";
+		else
+			return "<pre><code>";
 	case "codeblock":
 		return match[1];
 	case "codeblock_end":
